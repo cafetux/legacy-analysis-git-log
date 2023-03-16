@@ -69,12 +69,14 @@ soit avec le script bash dans le projet:
 
 Mergez les 2 fichiers:
 > echo "file,nb_revision,language,nb_blank_lines,nb_comment_lines,nb_line_of_code" > cloc_and_revisions.csv
+
 > awk -F "," 'FNR==NR {a[$2]=$1FS$3FS$4FS$5;next} $1 in a {print $0,a[$1]}' OFS="," cloc.csv commits_by_files.csv >> cloc_and_revisions.csv
 
 (pour chaque ligne du fichier 1, on stocke dans un tableau a les données avec comme clé la colonne 2 (le nom de fichier). Puis pour chaque ligne du fichier 2, si on trouve la première colonne dans a, on écrit la ligne courante + le contenu de a pour cette clé)
 
 
 Attention: 
+
 les noms de fichiers doivent être les même, et on arrive au soucis des renommage: certaines données de commit n'auront pas leur équivalent en ligne de code, car le fichier ne porte plus le même nom.
 
 
