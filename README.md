@@ -52,6 +52,14 @@ Différentes modes d'analyses sont possibles après l'option -a , dont :
 - authors : donne le nombre de révisions et le nombre d'auteurs par classe
 - coupling : trouve les couplages les plus forts entre 2 classes (couplage = modifiées ensembles)
 
+
+Il est aussi possible d'avoir une vision "macro" de la vie du projet, en regardant le nombre de commits par an ou par mois, par exemple.
+
+
+> cat historique_git.log | grep "^\[" | awk '{ print $2"-"$3","$4}' > commits_author_date.csv
+
+ Utilisez le script R [commit_per_time](R/commits_per_time.R) pour visualiser des graphiques de nombre de commits par mois/ans
+
 ### Croiser les données: Mes premiers "hotspots"
 
 Nous pourrions croiser les données de révision avec les données de complexité (que nous simplifierons en prenant le nombre de ligne de code).
@@ -74,10 +82,16 @@ Mergez les 2 fichiers:
 
 (pour chaque ligne du fichier 1, on stocke dans un tableau a les données avec comme clé la colonne 2 (le nom de fichier). Puis pour chaque ligne du fichier 2, si on trouve la première colonne dans a, on écrit la ligne courante + le contenu de a pour cette clé)
 
-
-Attention: 
-
+Attention:
 les noms de fichiers doivent être les même, et on arrive au soucis des renommage: certaines données de commit n'auront pas leur équivalent en ligne de code, car le fichier ne porte plus le même nom.
 
+### Points d'attention concernant les grandes codebase
 
+Sur une base de code très ancienne, il est possible que ressortent des vieux hotspots qui n'en sont plus. 
+N'hésitez pas à réduire le scope temporel.
 
+De même, il peut être intéressant de faire un script pour que les logs git suivent les renommages et les déplacements, en renommant les logs git des anciens noms dans les nouveaux noms
+
+Les visualization peuvent vite être illisibles s'il y a un trop grand nombre de classes, n'hésitez pas à filtrer, que ce soit par type de fichier (ne pas prendre en compte les json, xml, html, ect), ou par métrique (enlever les fichiers ayant moins de 10 commits par exemple ?)
+
+### 

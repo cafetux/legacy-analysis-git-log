@@ -1,12 +1,12 @@
 
 filesStats <- read.table(file = "cloc_and_revisions.csv",
-                      header = TRUE,
-                      sep = ",",
-                      quote = "\"" )
+                         header = TRUE,
+                         sep = ",",
+                         quote = "\"" )
 
 
 head(filesStats)
- 
+
 library(stringr)
 library(dplyr)
 library(treemapify)
@@ -28,10 +28,10 @@ codeBase <- filesStats %>% select(
   mutate(filename = str_extract(file, "[^/]+$")) %>%
   mutate(indiceLoc = nb_line_of_code/max_loc) %>%
   mutate(indiceRevs = nb_revision/max_revisions) %>%
-  as.data.frame() 
+  as.data.frame()
 
 
-# à coller dans la console pour avoir le rendu
+png(filename="tree_map_hotspots.png", units="in", width=30, height=20, res=300)
 ggplot(codeBase, aes(area = nb_line_of_code, fill = nb_revision, label = filename, subgroup = module, subgroup2 = type)) + 
   geom_treemap() +
   geom_treemap_subgroup_border(colour = "white", size = 6) +
@@ -42,3 +42,4 @@ ggplot(codeBase, aes(area = nb_line_of_code, fill = nb_revision, label = filenam
   geom_treemap_text(colour = "white",
                     place = "centre",
                     size = 15)
+dev.off()
