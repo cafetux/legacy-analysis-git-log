@@ -4,7 +4,7 @@ Je vais essayer de reprendre les chapitres du livre un par un.
 
 ## Introduction
 TL;DR: 
-le profiling decriminel à la sauce "silence des agneaux" est hollywoodien, ce qui compte ce sont les informations géographiques (les lieux des meurtres permettent de savoir où vit le tueur).
+le profiling de criminel à la sauce "silence des agneaux" est hollywoodien, ce qui compte ce sont les informations géographiques (les lieux des meurtres permettent de savoir où vit le tueur).
 
 Pour étudier du code, il faut en faire une carte géographique aussi. Et la donnée équivalente aux mouvements spatiaux mais concernant le code, ce sont les logs git.
 
@@ -26,6 +26,14 @@ https://github.com/AlDanial/cloc
 https://posit.co/download/rstudio-desktop/
 
 ## En pratique
+
+à noter que les étapes pour aller jusqu'à l'obtention d'un fichier de données sont regroupées dans le fichier analyze.sh.
+
+Conseils: 
+- créer un dossier refacto_nom_projet
+- cloner le projet à analyser à l'intérieur de ce répertoire (refacto_nom_projet/projet)
+- collez le fichier analyze.sh dans le répertoire projet
+- lancez le
 
 ### Générer des logs git
 
@@ -65,7 +73,7 @@ Il est aussi possible d'avoir une vision "macro" de la vie du projet, en regarda
 Nous pourrions croiser les données de révision avec les données de complexité (que nous simplifierons en prenant le nombre de ligne de code).
 
 Utilisez cloc pour obtenir les stats de ligne de code:
-> cloc ./ --by-file --csv --quiet
+> cloc * --by-file --csv --quiet
 
 Vous obtiendrez pour chaque fichier son language et les nombres de lignes de code, de commentaire et de vide.
 
@@ -94,4 +102,11 @@ De même, il peut être intéressant de faire un script pour que les logs git su
 
 Les visualization peuvent vite être illisibles s'il y a un trop grand nombre de classes, n'hésitez pas à filtrer, que ce soit par type de fichier (ne pas prendre en compte les json, xml, html, ect), ou par métrique (enlever les fichiers ayant moins de 10 commits par exemple ?)
 
-### 
+### Visualisations 
+
+Je propose d'utiliser le langage R pour créer des visualisation.
+
+Ouvrez RStudio, créez un projet dans un répertoire existant (refacto_mon_projet).
+Créez un fichier et collez le contenu de R/hotspots-revs-complexity.R dedans.
+
+Modifiez le (le script filtre sur Java)
