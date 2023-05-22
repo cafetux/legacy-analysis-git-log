@@ -8,6 +8,9 @@ le profiling de criminel à la sauce "silence des agneaux" est hollywoodien, ce 
 
 Pour étudier du code, il faut en faire une carte géographique aussi. Et la donnée équivalente aux mouvements spatiaux mais concernant le code, ce sont les logs git.
 
+Certaines personnes ont déjà recodé de mainère plus complète ce que propose le livre, comme ce répo: https://github.com/fouadh/gocan
+
+Le but de cet atelier est plus de pouvoir jouer avec les données, avoir une base plus évolutive d'investigation.
 
 ## Les outils
 
